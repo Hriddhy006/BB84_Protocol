@@ -2,6 +2,8 @@
 
 **Quantum Mesh** is a simulated quantum network environment that demonstrates the **BB84 protocol** integrated with an autonomous, self-healing routing system. It simulates quantum bit (qubit) transmission across a mesh network of European cities, detecting interference—such as an Eve-in-the-middle attack—and rerouting traffic through "quieter" quantum channels.
 
+## To learn more about this topic please go through the PPTX file in the file section
+
 
 ## 🚀 Key Features
 
