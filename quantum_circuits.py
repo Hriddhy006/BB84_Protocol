@@ -7,7 +7,7 @@ def generate_circuit_diagram(bit, basis):
     if basis == 'X': qc.h(0)
     return qc.draw(output='mpl')
 
-# Example: Bit 1 encoded in X-basis (|-> state)
 fig = generate_circuit_diagram(1, 'X')
 plt.title("Alice's Encoding Circuit (Bit 1, X-basis)")
+
 plt.show()
