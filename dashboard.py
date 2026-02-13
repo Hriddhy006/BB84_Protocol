@@ -9,7 +9,7 @@ import pandas as pd
 st.set_page_config(page_title="Quantum Hub", layout="wide")
 st.title("🛡️ Quantum Mesh: Self-Healing Dashboard")
 
-# Professional White Background Styling
+
 plt.rcParams.update({
     "figure.facecolor": "white",
     "axes.facecolor": "white",
@@ -36,17 +36,15 @@ def run_dashboard():
 
     G = nx.Graph()
 
-    # 1. Build Graph with Infinite Penalties for Noisy Links
     for i, u in enumerate(cities):
         for v in cities[i + 1:]:
             k1, k2 = f"{u}-{v}", f"{v}-{u}"
             val = noise_map.get(k1, noise_map.get(k2, 0.1))
 
-            # Mathematical forcing: if noise > 0.4, link is effectively infinite
+           
             weight = 1000000.0 if val > 0.4 else (1.0 + val)
             G.add_edge(u, v, weight=weight)
 
-    # 2. Autonomous Reroute Logic
     try:
         new_path = nx.shortest_path(G, source="London", target="Vienna", weight='weight')
         if new_path != current_route:
@@ -55,16 +53,16 @@ def run_dashboard():
     except:
         st.error("Operational Alert: Target unreachable through secure paths.")
 
-    # 3. Network Map Visualization
+    
     fig, ax = plt.subplots(figsize=(10, 6))
     pos = nx.circular_layout(G)
     nx.draw_networkx_edges(G, pos, alpha=0.1, edge_color='black', ax=ax)
 
-    # Active Path (Green)
+   
     path_edges = list(zip(current_route, current_route[1:]))
     nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color='green', width=5, ax=ax)
 
-    # Noise Indicators (Red Dashed)
+  
     for link, val in noise_map.items():
         if val > 0.4:
             try:
@@ -78,7 +76,6 @@ def run_dashboard():
     ax.axis('off')
     st.pyplot(fig)
 
-    # 4. Key Sifting Table and Shared Secret
     st.divider()
     col_a, col_b = st.columns([2, 1])
 
@@ -111,4 +108,5 @@ def run_dashboard():
 if __name__ == "__main__":
     run_dashboard()
     time.sleep(1)
+
     st.rerun()
